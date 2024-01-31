@@ -17,7 +17,7 @@ function App() {
     <div>
       <BrowserRouter>
       <Routes>
-        <Route path="/jimat_ui_front" element={<Login/>}/>
+        <Route path="/" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/users" element={<Users/>}/>
