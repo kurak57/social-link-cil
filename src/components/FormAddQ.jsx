@@ -189,7 +189,7 @@ const FormQ = () => {
                 stupen: (ma*3+dp*1.5+me*2+ar*0.5+ss+bs+fa*0.5+sc*1.5+mw*0.5+cr+bse*0.5)/15*10
             });
             console.log("Berhasil mengisi data pertanyaan");
-            // navigate("/interests");
+            navigate("/interests");
         } catch (error) {
             if(error.response) {
                 setMsg(error.response.data.msg);
@@ -199,7 +199,7 @@ const FormQ = () => {
 
   return (
     <div>
-        <div className='columns ml-2 mb-1'>
+        <div className='columns pl-2 mb-1'>
             <div className="column">
                 <h1 className='title'>Pertanyaan Pemetaan Minat dan Bakat MBKM</h1>
                 <h2 className='subtitle'>Silahkan isi sesuai kondisi diri!</h2>

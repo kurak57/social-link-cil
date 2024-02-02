@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
-import Layout from './Layout';
-import Welcome from "../components/Welcome";
+import React, { useEffect } from 'react'
+import Layout from './Layout.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice.js";
+import ParseExcel from '../components/ParseExcel.jsx';
 
-const Dashboard = () => {
+const AddUserExcel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {isError} = useSelector((state => state.auth));
@@ -22,9 +22,9 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <Welcome/>
+        <ParseExcel/>
     </Layout>
-    )
+  );
 };
 
-export default Dashboard
+export default AddUserExcel;
