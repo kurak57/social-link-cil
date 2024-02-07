@@ -170,7 +170,7 @@ const FormQ = () => {
 
   const saveQ = async () => {
         try {
-            await axios.post('http://localhost:5000/scores', {
+            await axios.post('https://vercel.com/kurak57s-projects/jimat-ui-back/scores', {
                 name: fd.name,
                 fakultas: fd.fakultas,
                 sf_like: sf1, sf_comp: sf2, ma_like: ma1, ma_comp: ma2, bd_like: bd1, bd_comp: bd2,
