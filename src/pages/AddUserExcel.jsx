@@ -22,7 +22,7 @@ const AddUserExcel = () => {
 
   return (
     <Layout>
-        <ParseExcel/>
+      <ParseExcel/>
     </Layout>
   );
 };

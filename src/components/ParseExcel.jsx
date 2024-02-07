@@ -11,6 +11,16 @@ const ParseExcel = () => {
     const navigate = useNavigate();
 
     const handleFile = async (e) => {
+        // const reader = new FileReader();
+        // reader.readAsBinaryString(e.target.files[0])
+        // reader.onload = (e) => {
+        //     const data = e.target.result;
+        //     const workbook = XLSX.read(data, {type: "binary"})
+        //     const worksheet = workbook.Sheets[workbook.SheetNames[0]]
+        //     const jsonData = XLSX.utils.sheet_to_json(worksheet)
+        //     setExcelData(jsonData)
+        //     console.log(excelData);
+        // }
         const file = e.target.files[0];
         setFileName(file.name);
         // console.log(fileName);
@@ -20,33 +30,37 @@ const ParseExcel = () => {
         const worksheet = workbook.Sheets[workbook.SheetNames[0]]
         const jsonData = XLSX.utils.sheet_to_json(worksheet)
         setExcelData(jsonData)
-        // console.log(excelData);
+    }
 
-        for (let i = 0; i < jsonData.length; i++) {
+    const saveUser = async (e) => {
+        // const excel = excelData[1]
+        for (let i = 0; i < excelData.length; i++) {
             let excel = excelData[i]
-            // console.log(excel.nama);
-
-            const saveUser = async (e) => {
-                e.preventDefault()
-                try {
-                    await axios.post('http://localhost:5000/users', {
-                        name: excel.nama,
-                        fakultas: excel.fakultas,
-                        email: excel.email,
-                        password: excel.npm,
-                        confPassword: excel.npm,
-                        role: "user"
-                    });
-                    navigate("/");
-                } catch (error) {
-                    if(error.response) {
-                        setMsg(error.response.data.msg);
-                    }
+            // console.log(
+            //     excel.nama,
+            //     excel.fakultas,
+            //     excel.email,
+            //     excel.npm
+            //     );
+            e.preventDefault()
+            try {
+                await axios.post('http://localhost:5000/users', {
+                    name: excel.nama,
+                    fakultas: excel.fakultas,
+                    email: excel.email,
+                    password: toString(excel.npm),
+                    confPassword: toString(excel.npm),
+                    role: "user"
+                });
+            } catch (error) {
+                if(error.response) {
+                    setMsg(error.response.data.msg);
                 }
             }
         }
-        
+        navigate("/users");
     }
+
   return (
     <div>
         <div className='pl-2'>
@@ -55,13 +69,14 @@ const ParseExcel = () => {
             <Link to={"/users/add"} className='button is-primary mb-2'>Add a user</Link>
         </div>
         <div className="card is-shadowless">
+            <p>{msg}</p>
             <div className="card-content">
                 <div className="content">
                 <h3>Parse Excel</h3>
                     
                     <div className="file has-name">
                     <label className="file-label">
-                        <input className="file-input" type="file" onChange={(e) => handleFile(e)}/>
+                        <input className="file-input" type="file" accept='.xlsx, .xls' onChange={(e) => handleFile(e)}/>
                         <span className="file-cta">
                             <span className="file-label">
                                 Choose a file…
@@ -75,7 +90,8 @@ const ParseExcel = () => {
                     </label>
                     </div>
                 </div>
-                <div className='table-container'>
+                {excelData.length > 0 && (
+                    <div className='table-container'>
                     <table className="table is-striped is-fullwidth">
                         <thead>
                             <tr>
@@ -84,11 +100,14 @@ const ParseExcel = () => {
                                 <th>Fakultas</th>
                                 <th>Email</th>
                                 <th>NPM</th>
+                                {/* {Object.keys(excelData[0]).map((key) => (
+                                    <th key={key}>{key}</th>
+                                ))} */}
                             </tr>
                         </thead>
                         <tbody>
-                            {excelData.map((eData, index)=>(
-                            <tr>
+                        {excelData.map((eData, index)=>(
+                            <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{eData.nama}</td>
                                 <td>{eData.fakultas}</td>
@@ -96,9 +115,21 @@ const ParseExcel = () => {
                                 <td>{eData.npm}</td>
                             </tr>
                             ))}
+                            {/* {excelData.map((row, index)=>(
+                            <tr key={index}>
+                                <td>inde</td>
+                                {Object.values(row).map((value, index) => (
+                                    <td key={index}>{value}</td>
+                                ))}
+                            </tr>
+                            ))} */}
                         </tbody>
                     </table>
+                    <div>
+                       <button onClick={saveUser} type='submit' className="button is-success is-fullwidth">Daftarkan!</button>
+                    </div>
                 </div>
+                )}
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@ const Interestlist = () => {
         <h2 className='subtitle'>List of Interest</h2>
         <Link to={"/formq"} className='button is-primary'>Add New</Link>
         </div>
-        <div className='card is-shadowless columns is-desktop mt-1 pl-2'>
+        <div className='table-container px-2'>
         <table className='table is-striped is-narrow is-hoverable is-fullwidth'>
             <thead>
                 <tr>
