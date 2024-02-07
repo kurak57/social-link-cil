@@ -23,7 +23,7 @@ const Interestlist = () => {
 
   return (
     <div>
-        <div className='pl-2'>
+        <div className='pl-2 mb-2'>
         <h1 className='title'>Interest</h1>
         <h2 className='subtitle'>List of Interest</h2>
         <Link to={"/formq"} className='button is-primary'>Add New</Link>
