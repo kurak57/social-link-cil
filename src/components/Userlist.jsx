@@ -15,7 +15,7 @@ const Userlist = () => {
     }
 
     const deleteUser = async (userId) =>{
-        await axios.delete(`http://localhost:5000/users/${userId}`);
+        await axios.delete(`https://jimat-ui-back.vercel.app/${userId}`);
         getUsers();
     }
   return (

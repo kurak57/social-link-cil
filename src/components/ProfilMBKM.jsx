@@ -61,7 +61,7 @@ const PM = () => {
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
-                const response = await axios.get(`http://localhost:5000/scores/${id}`);
+                const response = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}`);
                 const sdt = response.data
                 setDataScore({
                 ...dataScore, 
@@ -86,7 +86,7 @@ const PM = () => {
         }
         const getAvgFakultas = async () =>{
             try {
-                const dataFakultas = await axios.get(`http://localhost:5000/scores/${id}/fakultas`);
+                const dataFakultas = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}/fakultas`);
                 setAvgFakultas({
                     ...avgFakultas,
                     avg_pp: dataFakultas.data[0].avgPrtknPelajar,
@@ -107,7 +107,7 @@ const PM = () => {
         };
         const getAvgUniv = async () =>{
             try {
-                const dataUniv= await axios.get(`http://localhost:5000/scores/${id}/univ`);
+                const dataUniv= await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}/univ`);
                 setAvgUniv({
                     ...avgUniv,
                     avgU_pp: dataUniv.data[0].avgAllPrtknPelajar,

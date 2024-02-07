@@ -100,7 +100,7 @@ const PMin = () => {
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
-                const response = await axios.get(`http://localhost:5000/scores/${id}`);
+                const response = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}`);
                 const sdt = response.data
                 setDataScore({
                 ...dataScore, 
