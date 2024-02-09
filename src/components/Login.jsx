@@ -14,11 +14,12 @@ const Login = () => {
 
     useEffect(()=>{
         if(user || isSuccess){
-            setTimeout(()=>{
-                navigate("/dashboard")
-            }, 2000)
-        }
+            // setTimeout(()=>{
+            //     navigate("/dashboard")
+            // }, 2000)
+            setTimeout(navigate("/dashboard"), 2000)
         console.log('login sukses');
+        }
         dispatch(reset());
     }, [user, isSuccess, dispatch, navigate]);
 
