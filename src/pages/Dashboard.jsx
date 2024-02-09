@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMe } from "../features/authSlice.js";
 
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,13 +17,9 @@ const Dashboard = () => {
 
   useEffect(()=> {
     if(isError){
-      try {
-        dispatch(getMe());
-      } catch (error) {
       navigate("/");
-      }
     }
-  }, [isError, navigate, dispatch]);
+  }, [isError, navigate]);
 
   return (
     <Layout>

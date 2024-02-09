@@ -20,7 +20,7 @@ const SignUp = () => {
     const saveUser = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('https://jimat-ui-back.vercel.app/users', {
+            await axios.post('https://pasta-finder-back.vercel.app/users', {
                 name: name,
                 fakultas: fakultas,
                 email: email,
