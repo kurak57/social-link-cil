@@ -44,7 +44,7 @@ const ParseExcel = () => {
             //     );
             e.preventDefault()
             try {
-                await axios.post('https://pasta-finder-back.vercel.app/users', {
+                await axios.post('https://jimat-ui-back.vercel.app/users', {
                     name: excel.nama,
                     fakultas: excel.fakultas,
                     email: excel.email,

@@ -12,12 +12,12 @@ const Interestlist = () => {
     },[]);
 
     const getScores = async () => {
-        const response = await axios.get('https://pasta-finder-back.vercel.app/scores');
+        const response = await axios.get('https://jimat-ui-back.vercel.app/scores');
         setScores(response.data);
     }
 
     const deleteScore = async (scoreId) =>{
-        await axios.delete(`https://pasta-finder-back.vercel.app/scores/${scoreId}`);
+        await axios.delete(`https://jimat-ui-back.vercel.app/scores/${scoreId}`);
         getScores();
     }
 
