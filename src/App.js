@@ -6,7 +6,6 @@ import Users from "./pages/Users";
 import Interests from "./pages/Interests";
 import AddUser from "./pages/AddUser";
 import EditUser from "./pages/EditUser";
-import AddInterest from "./pages/AddInterest";
 import EditInterest from "./pages/EditIntetest";
 import AddQ from "./pages/AddQ";
 import ProfilMbkm from "./pages/ProfilMbkm";
@@ -26,7 +25,6 @@ function App() {
         <Route path="/users/addExcel" element={<AddUserExcel/>}/>
         <Route path="/users/edit/:id" element={<EditUser/>}/>
         <Route path="/interests" element={<Interests/>}/>
-        <Route path="/interests/add" element={<AddInterest/>}/>
         <Route path="/interests/edit/:id" element={<EditInterest/>}/>
         <Route path="/interests/mbkm/:id" element={<ProfilMbkm/>}/>
         <Route path="/interests/minat/:id" element={<ProfilMinat/>}/>

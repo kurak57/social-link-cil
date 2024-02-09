@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { useNavigate, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import {Chart as ChartJS, LineElement, PointElement, Tooltip, Legend, RadialLinearScale, Filler, RadarController, elements} from 'chart.js'
 import {Radar} from 'react-chartjs-2';
 ChartJS.register(
@@ -31,7 +31,7 @@ const PM = () => {
     });
     console.log(avgUniv, avgFakultas);
     const [msg, setMsg] = useState('');
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {id} = useParams();
 
     const points = [dsc.pertukaranPelajar, dsc.magang, dsc.asistensiMengajar, dsc.penelitian,
@@ -39,21 +39,21 @@ const PM = () => {
     points.sort(function(a, b){return b-a});
     
     const rekom = (x) =>{
-        if (points[x]==dsc.pertukaranPelajar) {
+        if (points[x]===dsc.pertukaranPelajar) {
             return "Pertukaran Pelajar"
-        } else if (points[x]==dsc.magang) {
+        } else if (points[x]===dsc.magang) {
             return "Magang/ Praktik Kerja"  
-        } else if (points[x]==dsc.asistensiMengajar) {
+        } else if (points[x]===dsc.asistensiMengajar) {
             return "Asistensi Mengajar di Satuan Pendidikan"  
-        } else if (points[x]==dsc.penelitian) {
+        } else if (points[x]===dsc.penelitian) {
             return "Penelitian/ Riset"  
-        } else if (points[x]==dsc.kemanusiaan) {
+        } else if (points[x]===dsc.kemanusiaan) {
             return "Proyek Kemanusiaan"  
-        } else if (points[x]==dsc.wirausaha) {
+        } else if (points[x]===dsc.wirausaha) {
             return "Kegiatan Wirausaha"  
-        } else if (points[x]==dsc.stupen) {
+        } else if (points[x]===dsc.stupen) {
             return "Studi/ Proyek Independen"  
-        } else if (points[x]==dsc.k2nTematik) {
+        } else if (points[x]===dsc.k2nTematik) {
             return "Membangun Desa/ Kuliah Kerja Nyata Tematik"  
         }
     }
