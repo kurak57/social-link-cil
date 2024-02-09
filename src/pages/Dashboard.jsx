@@ -16,9 +16,13 @@ const Dashboard = () => {
 
   useEffect(()=> {
     if(isError){
+      try {
+        dispatch(getMe());
+      } catch (error) {
       navigate("/");
+      }
     }
-  }, [isError, navigate]);
+  }, [isError, navigate, dispatch]);
 
   return (
     <Layout>

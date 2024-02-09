@@ -17,7 +17,7 @@ const logout = () =>{
 
   return (
     <div>
-    <aside class="menu pl-4 has-shadow">
+    <aside className="menu pl-4 has-shadow">
         <p className="menu-label">General</p>
       <ul className="menu-list">
         <li> 

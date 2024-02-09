@@ -10,7 +10,7 @@ const Userlist = () => {
     },[]);
 
     const getUsers = async () => {
-        const response = await axios.get('http://localhost:5000/users');
+        const response = await axios.get('https://jimat-ui-back.vercel.app/users');
         setUsers(response.data);
     }
 
