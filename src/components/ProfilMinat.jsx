@@ -59,41 +59,41 @@ const PMin = () => {
     composite.sort(function(a, b){return b-a});
 
     const rekomL = (x) =>{
-        if (composite[x]==sf) {
+        if (composite[x]===sf) {
             return "Social Facilitating"
-        } else if (composite[x]==ma) {
+        } else if (composite[x]===ma) {
             return "Managing"  
-        } else if (composite[x]==bd) {
+        } else if (composite[x]===bd) {
             return "Business Detail"  
-        } else if (composite[x]==dp) {
+        } else if (composite[x]===dp) {
             return "Data Processing"  
-        } else if (composite[x]==me) {
+        } else if (composite[x]===me) {
             return "Mechanical"  
-        } else if (composite[x]==no) {
+        } else if (composite[x]===no) {
             return "Nature/Outdoors"  
-        } else if (composite[x]==ar) {
+        } else if (composite[x]===ar) {
             return "Artistic"  
-        } else if (composite[x]==he) {
+        } else if (composite[x]===he) {
             return "Helping"  
-        } else if (composite[x]==ss) {
+        } else if (composite[x]===ss) {
             return "Social Sciences"  
-        } else if (composite[x]==inc) {
+        } else if (composite[x]===inc) {
             return "Influence"  
-        } else if (composite[x]==bs) {
+        } else if (composite[x]===bs) {
             return "Business Systems"  
-        } else if (composite[x]==fa) {
+        } else if (composite[x]===fa) {
             return "Financial Analysis"  
-        } else if (composite[x]==sc) {
+        } else if (composite[x]===sc) {
             return "Science"  
-        } else if (composite[x]==qc) {
+        } else if (composite[x]===qc) {
             return "Quality Control"  
-        } else if (composite[x]==mw) {
+        } else if (composite[x]===mw) {
             return "Manual Work"  
-        } else if (composite[x]==ps) {
+        } else if (composite[x]===ps) {
             return "Personal Service"  
-        } else if (composite[x]==cr) {
+        } else if (composite[x]===cr) {
             return "Construction/Repair"  
-        } else if (composite[x]==bse) {
+        } else if (composite[x]===bse) {
             return "Basic Service"  
         }
     }
