@@ -13,7 +13,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls13' 
                                             value={formData.ls13} onChange={(e)=>
                                             setFormData({...formData, ls13: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=>(<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>

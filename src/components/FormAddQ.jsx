@@ -217,7 +217,7 @@ const FormQ = () => {
             <div className="footer">
                 <button
                     className="button is-primary is-rounded"
-                    disabled={page == 0}
+                    disabled={page === 0}
                     onClick={() => {
                     setPage((currPage) => currPage - 1);
                     }}

@@ -29,7 +29,7 @@ const PM = () => {
         avgU_pp: 0,avgU_mpk: 0, avgU_am:0,
         avgU_pr: 0, avgU_pk:0,avgU_kw:0, avgU_spi:0, avgU_k2n:0,
     });
-    console.log(avgUniv, avgFakultas);
+    // console.log(avgUniv, avgFakultas);
     const [msg, setMsg] = useState('');
     // const navigate = useNavigate();
     const {id} = useParams();
@@ -38,33 +38,56 @@ const PM = () => {
     dsc.kemanusiaan, dsc.wirausaha, dsc.stupen, dsc.k2nTematik];
     points.sort(function(a, b){return b-a});
     
-    const rekom = (x) =>{
-        if (points[x]===dsc.pertukaranPelajar) {
-            return "Pertukaran Pelajar"
-        } else if (points[x]===dsc.magang) {
-            return "Magang/ Praktik Kerja"  
-        } else if (points[x]===dsc.asistensiMengajar) {
-            return "Asistensi Mengajar di Satuan Pendidikan"  
-        } else if (points[x]===dsc.penelitian) {
-            return "Penelitian/ Riset"  
-        } else if (points[x]===dsc.kemanusiaan) {
-            return "Proyek Kemanusiaan"  
-        } else if (points[x]===dsc.wirausaha) {
-            return "Kegiatan Wirausaha"  
-        } else if (points[x]===dsc.stupen) {
-            return "Studi/ Proyek Independen"  
-        } else if (points[x]===dsc.k2nTematik) {
-            return "Membangun Desa/ Kuliah Kerja Nyata Tematik"  
+    // console.log("3 Nilai tertinggi:");
+    // for (let i = 0; i < 3; i++) {
+    //     console.log(points[i]);
+    // }
+    const rekom = () => {
+        let results = [];
+        for (let i = 0; i < points.length; i++) {
+            let result = '';
+            if (points[i] === dsc.pertukaranPelajar && !results.includes("Pertukaran Pelajar")) {
+                result = "Pertukaran Pelajar";
+                results.push(result);
+            } else if (points[i] === dsc.magang && !results.includes("Magang/ Praktik Kerja")) {
+                result = "Magang/ Praktik Kerja";
+                results.push(result);
+            } else if (points[i] === dsc.asistensiMengajar && !results.includes("Asistensi Mengajar di Satuan Pendidikan")) {
+                result = "Asistensi Mengajar di Satuan Pendidikan";
+                results.push(result);
+            } else if (points[i] === dsc.penelitian && !results.includes("Penelitian/ Riset")) {
+                result = "Penelitian/ Riset";
+                results.push(result);
+            } else if (points[i] === dsc.kemanusiaan && !results.includes("Proyek Kemanusiaan")) {
+                result = "Proyek Kemanusiaan";
+                results.push(result);
+            } else if (points[i] === dsc.wirausaha && !results.includes("Kegiatan Wirausaha")) {
+                result = "Kegiatan Wirausaha";
+                results.push(result);
+            } else if (points[i] === dsc.stupen && !results.includes("Studi/ Proyek Independen")) {
+                result = "Studi/ Proyek Independen";
+                results.push(result);
+            } else if (points[i] === dsc.k2nTematik && !results.includes("Membangun Desa/ Kuliah Kerja Nyata Tematik")) {
+                result = "Membangun Desa/ Kuliah Kerja Nyata Tematik";
+                results.push(result);
+            }
+            if (results.length === 3) {
+                break;
+            }
         }
+        return results;
     }
-    console.log(rekom(0));
+
+    // console.log("Rekomendasi:");
+    // console.log(rekom());
+
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
                 const response = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}`);
                 const sdt = response.data
-                setDataScore({
-                ...dataScore, 
+                setDataScore(d => ({
+                ...d,
                 name: sdt.name, fakultas: sdt.fakultas,
                 sf_like: sdt.sf_like, sf_comp: sdt.sf_comp, ma_like: sdt.ma_like, ma_comp: sdt.ma_comp, bd_like: sdt.bd_like, bd_comp: sdt.bd_comp,
                 dp_like: sdt.dp_like, dp_comp: sdt.dp_comp, me_like: sdt.me_like, me_comp: sdt.me_comp, no_like: sdt.no_like, no_comp: sdt.no_comp,
@@ -76,7 +99,7 @@ const PM = () => {
                 magang: sdt.magang, asistensiMengajar: sdt.asistensiMengajar,
                 penelitian: sdt.penelitian, kemanusiaan: sdt.kemanusiaan, 
                 wirausaha: sdt.wirausaha, stupen: sdt.stupen
-                })
+                }));
                 // console.log(response);
             } catch (error) {
                 if(error.response) {
@@ -87,17 +110,17 @@ const PM = () => {
         const getAvgFakultas = async () =>{
             try {
                 const dataFakultas = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}/fakultas`);
-                setAvgFakultas({
-                    ...avgFakultas,
-                    avg_pp: dataFakultas.data[0].avgPrtknPelajar,
-                    avg_mpk: dataFakultas.data[0].avgMagang, 
-                    avg_am: dataFakultas.data[0].avgAsisMengajar,
-                    avg_pr: dataFakultas.data[0].avgPenelitian,
-                    avg_pk: dataFakultas.data[0].avgKemanusiaan,
-                    avg_kw: dataFakultas.data[0].avgWirausaha,
-                    avg_spi: dataFakultas.data[0].avgStupen, 
-                    avg_k2n: dataFakultas.data[0].avgTematik
-                })
+                setAvgFakultas( af => ({
+                        ...af,
+                        avg_pp: dataFakultas.data[0].avgPrtknPelajar,
+                        avg_mpk: dataFakultas.data[0].avgMagang, 
+                        avg_am: dataFakultas.data[0].avgAsisMengajar,
+                        avg_pr: dataFakultas.data[0].avgPenelitian,
+                        avg_pk: dataFakultas.data[0].avgKemanusiaan,
+                        avg_kw: dataFakultas.data[0].avgWirausaha,
+                        avg_spi: dataFakultas.data[0].avgStupen, 
+                        avg_k2n: dataFakultas.data[0].avgTematik
+                    }))
                 // console.log(dataFakultas);
             } catch (error) {
                 if(error.response) {
@@ -108,8 +131,8 @@ const PM = () => {
         const getAvgUniv = async () =>{
             try {
                 const dataUniv= await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}/univ`);
-                setAvgUniv({
-                    ...avgUniv,
+                setAvgUniv(avgu => ({
+                    ...avgu,
                     avgU_pp: dataUniv.data[0].avgAllPrtknPelajar,
                     avgU_mpk: dataUniv.data[0].avgAllMagang, 
                     avgU_am: dataUniv.data[0].avgallAsisMengajar,
@@ -117,8 +140,8 @@ const PM = () => {
                     avgU_pk: dataUniv.data[0].avgAllKemanusiaan,
                     avgU_kw: dataUniv.data[0].avgAllWirausaha,
                     avgU_spi: dataUniv.data[0].avgAllStupen, 
-                    avgU_k2n: dataUniv.data[0].avgAllTematik,
-                })
+                    avgU_k2n: dataUniv.data[0].avgAllTematik
+                }))
             } catch (error) {
                 if(error.response) {
                     setMsg(error.response.data.msg);
@@ -239,9 +262,9 @@ const PM = () => {
                         <p className='mb-0'><strong>Rekomendasi</strong></p>
                         <p className='mb-0'>Peserta direkomendasikan untuk mengikuti kegiatan MBKM:</p>
                         <ol className='mt-0'>
-                            <li>{rekom(0)}</li>
-                            <li>{rekom(1)}</li>
-                            <li>{rekom(2)}</li>
+                            <li>{rekom()[0]}</li>
+                            <li>{rekom()[1]}</li>
+                            <li>{rekom()[2]}</li>
                         </ol>
                     </div>
                     <div className='column is-full px-5 mt-0'>
@@ -255,7 +278,7 @@ const PM = () => {
                         <tbody>
                         <tr>
                                 <td className='is-warning is-light'>Pertukaran Pelajar</td>
-                                <td rowspan="2">{dataScore.pertukaranPelajar}</td>
+                                <td rowSpan="2">{dataScore.pertukaranPelajar}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -266,7 +289,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Magang/ Praktik Kerja</td>
-                                <td rowspan="2">{dataScore.magang}</td>
+                                <td rowSpan="2">{dataScore.magang}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -277,7 +300,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Asistensi Mengajar di Satuan Pendidikan</td>
-                                <td rowspan="2">{dataScore.asistensiMengajar}</td>
+                                <td rowSpan="2">{dataScore.asistensiMengajar}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -288,7 +311,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Penelitian/ Riset</td>
-                                <td rowspan="2">{dataScore.penelitian}</td>
+                                <td rowSpan="2">{dataScore.penelitian}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -299,7 +322,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Proyek Kemanusiaan</td>
-                                <td rowspan="2">{dataScore.kemanusiaan}</td>
+                                <td rowSpan="2">{dataScore.kemanusiaan}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -310,7 +333,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Kegiatan Wirausaha</td>
-                                <td rowspan="2">{dataScore.wirausaha}</td>
+                                <td rowSpan="2">{dataScore.wirausaha}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -321,7 +344,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Studi/ Proyek Independen</td>
-                                <td rowspan="2">{dataScore.stupen}</td>
+                                <td rowSpan="2">{dataScore.stupen}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -340,7 +363,7 @@ const PM = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Membangun Desa/ Kuliah Kerja Nyata Tematik</td>
-                                <td rowspan="2">{dataScore.k2nTematik}</td>
+                                <td rowSpan="2">{dataScore.k2nTematik}</td>
                             </tr>
                             <tr>
                                 <td>

@@ -56,7 +56,7 @@ const FormAddUser = () => {
                             <div className="control">
                             <div className="select is-fullwidth">
                                     <select value={fakultas} onChange={(e)=> setFakultas(e.target.value)}>
-                                    { dataFakultas.map(opt1=><option>{opt1}</option>) }
+                                    { dataFakultas.map((opt1, index)=>(<option key={index} value={opt1}>{opt1}</option>)) }
                                     </select>
                                 </div>
                             </div>

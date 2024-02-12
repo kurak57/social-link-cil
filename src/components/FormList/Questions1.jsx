@@ -25,7 +25,7 @@ function Questions1({ formData, setFormData }) {
                             <div className="control">
                                 <div className="select is-fullwidth">
                                 < select value={formData.fakultas} onChange={(e)=>setFormData({...formData, fakultas: e.target.value })}>
-                                    { dataFakultas.map( opt => <option value={opt}>{opt}</option>) }
+                                    { dataFakultas.map((opt, index) => (<option key={index} value={opt}>{opt}</option>)) }
                                 </select >
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { useNavigate, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import {Chart as ChartJS, LineElement, PointElement, Tooltip, Legend, RadialLinearScale, Filler, RadarController, elements} from 'chart.js'
 import {Radar} from 'react-chartjs-2';
 ChartJS.register(
@@ -21,7 +21,6 @@ const PMin = () => {
     const dsc=dataScore
     
     const [msg, setMsg] = useState('');
-    const navigate = useNavigate();
     const {id} = useParams();
 
     // const liking = [
@@ -58,52 +57,77 @@ const PMin = () => {
     const composite = [sf, ma, bd, dp, me, no, ar, he, ss, inc, bs, fa, sc, qc, mw, ps, cr, bse]
     composite.sort(function(a, b){return b-a});
 
-    const rekomL = (x) =>{
-        if (composite[x]===sf) {
-            return "Social Facilitating"
-        } else if (composite[x]===ma) {
-            return "Managing"  
-        } else if (composite[x]===bd) {
-            return "Business Detail"  
-        } else if (composite[x]===dp) {
-            return "Data Processing"  
-        } else if (composite[x]===me) {
-            return "Mechanical"  
-        } else if (composite[x]===no) {
-            return "Nature/Outdoors"  
-        } else if (composite[x]===ar) {
-            return "Artistic"  
-        } else if (composite[x]===he) {
-            return "Helping"  
-        } else if (composite[x]===ss) {
-            return "Social Sciences"  
-        } else if (composite[x]===inc) {
-            return "Influence"  
-        } else if (composite[x]===bs) {
-            return "Business Systems"  
-        } else if (composite[x]===fa) {
-            return "Financial Analysis"  
-        } else if (composite[x]===sc) {
-            return "Science"  
-        } else if (composite[x]===qc) {
-            return "Quality Control"  
-        } else if (composite[x]===mw) {
-            return "Manual Work"  
-        } else if (composite[x]===ps) {
-            return "Personal Service"  
-        } else if (composite[x]===cr) {
-            return "Construction/Repair"  
-        } else if (composite[x]===bse) {
-            return "Basic Service"  
+    const rekomL = () => {
+        let results = [];
+        for (let x = 0; x < 3; x++) {
+            if (composite[x] === sf && !results.includes("Social Facilitating")) {
+                results.push("Social Facilitating");
+            } 
+            else if (composite[x] === ma && !results.includes("Managing")) {
+                results.push("Managing");
+            } 
+            else if (composite[x] === bd && !results.includes("Business Detail")) {
+                results.push("Business Detail");
+            } 
+            else if (composite[x] === dp && !results.includes("Data Processing")) {
+                results.push("Data Processing");
+            } 
+            else if (composite[x] === me && !results.includes("Mechanical")) {
+                results.push("Mechanical");
+            } 
+            else if (composite[x] === no && !results.includes("Nature/Outdoors")) {
+                results.push("Nature/Outdoors");
+            } 
+            else if (composite[x] === ar && !results.includes("Artistic")) {
+                results.push("Artistic");
+            } 
+            else if (composite[x] === he && !results.includes("Helping")) {
+                results.push("Helping");
+            } 
+            else if (composite[x] === ss && !results.includes("Social Sciences")) {
+                results.push("Social Sciences");
+            } 
+            else if (composite[x] === inc && !results.includes("Influence")) {
+                results.push("Influence");
+            } 
+            else if (composite[x] === bs && !results.includes("Business Systems")) {
+                results.push("Business Systems");
+            } 
+            else if (composite[x] === fa && !results.includes("Financial Analysis")) {
+                results.push("Financial Analysis");
+            } 
+            else if (composite[x] === sc && !results.includes("Science")) {
+                results.push("Science");
+            } 
+            else if (composite[x] === qc && !results.includes("Quality Control")) {
+                results.push("Quality Control");
+            } 
+            else if (composite[x] === mw && !results.includes("Manual Work")) {
+                results.push("Manual Work");
+            } 
+            else if (composite[x] === ps && !results.includes("Personal Service")) {
+                results.push("Personal Service");
+            } 
+            else if (composite[x] === cr && !results.includes("Construction/Repair")) {
+                results.push("Construction/Repair");
+            } 
+            else if (composite[x] === bse && !results.includes("Basic Service")) {
+                results.push("Basic Service");
+            }
         }
+        return results;
     }
+
+    // console.log("Rekomendasi:");
+    // console.log(rekomL());
+
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
                 const response = await axios.get(`https://jimat-ui-back.vercel.app/scores/${id}`);
                 const sdt = response.data
-                setDataScore({
-                ...dataScore, 
+                setDataScore( d => ({
+                ...d, 
                 name: sdt.name, fakultas: sdt.fakultas,
                 sf_like: sdt.sf_like, sf_comp: sdt.sf_comp, ma_like: sdt.ma_like, ma_comp: sdt.ma_comp, bd_like: sdt.bd_like, bd_comp: sdt.bd_comp,
                 dp_like: sdt.dp_like, dp_comp: sdt.dp_comp, me_like: sdt.me_like, me_comp: sdt.me_comp, no_like: sdt.no_like, no_comp: sdt.no_comp,
@@ -111,7 +135,7 @@ const PMin = () => {
                 in_like: sdt.in_like, in_comp: sdt.in_comp, bs_like: sdt.bs_like, bs_comp: sdt.bs_comp, fa_like: sdt.fa_like, fa_comp: sdt.fa_comp,
                 sc_like: sdt.sc_like, sc_comp: sdt.sc_comp, qc_like: sdt.qc_like, qc_comp: sdt.qc_comp, mw_like: sdt.mw_like, mw_comp: sdt.mw_comp,
                 ps_like: sdt.ps_like, ps_comp: sdt.ps_comp, cr_like: sdt.cr_like, cr_comp: sdt.cr_comp, bse_like: sdt.bse_like, bse_comp: sdt.bse_comp
-                })
+                }));
                 // console.log(response);
             } catch (error) {
                 if(error.response) {
@@ -199,9 +223,9 @@ const PMin = () => {
                         <p className='mb-0'><strong>Kesimpulan</strong></p>
                         <p className='mb-0'>Peserta memiliki minat dominan pada aspek:</p>
                         <ol className='mt-0'>
-                            <li>{rekomL(0)}</li>
-                            <li>{rekomL(1)}</li>
-                            <li>{rekomL(2)}</li>
+                            <li>{rekomL()[0]}</li>
+                            <li>{rekomL()[1]}</li>
+                            <li>{rekomL()[2]}</li>
                         </ol>
                     </div>
                     <div className='column is-full px-5 mt-0'>
@@ -217,9 +241,9 @@ const PMin = () => {
                         <tbody>
                         <tr>
                                 <td className='is-warning is-light'>Social Facilitating</td>
-                                <td rowspan="2">{dsc.sf_like}</td>
-                                <td rowspan="2">{dsc.sf_comp}</td>
-                                <td rowspan="2">{sf}</td>
+                                <td rowSpan="2">{dsc.sf_like}</td>
+                                <td rowSpan="2">{dsc.sf_comp}</td>
+                                <td rowSpan="2">{sf}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -230,9 +254,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Managing</td>
-                                <td rowspan="2">{dsc.ma_like}</td>
-                                <td rowspan="2">{dsc.ma_comp}</td>
-                                <td rowspan="2">{ma}</td>
+                                <td rowSpan="2">{dsc.ma_like}</td>
+                                <td rowSpan="2">{dsc.ma_comp}</td>
+                                <td rowSpan="2">{ma}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -243,9 +267,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Business Detail</td>
-                                <td rowspan="2">{dsc.bd_like}</td>
-                                <td rowspan="2">{dsc.bd_comp}</td>
-                                <td rowspan="2">{bd}</td>
+                                <td rowSpan="2">{dsc.bd_like}</td>
+                                <td rowSpan="2">{dsc.bd_comp}</td>
+                                <td rowSpan="2">{bd}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -256,9 +280,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Data Processing</td>
-                                <td rowspan="2">{dsc.dp_like}</td>
-                                <td rowspan="2">{dsc.dp_comp}</td>
-                                <td rowspan="2">{dp}</td>
+                                <td rowSpan="2">{dsc.dp_like}</td>
+                                <td rowSpan="2">{dsc.dp_comp}</td>
+                                <td rowSpan="2">{dp}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -269,9 +293,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Mechanical</td>
-                                <td rowspan="2">{dsc.me_like}</td>
-                                <td rowspan="2">{dsc.me_comp}</td>
-                                <td rowspan="2">{me}</td>
+                                <td rowSpan="2">{dsc.me_like}</td>
+                                <td rowSpan="2">{dsc.me_comp}</td>
+                                <td rowSpan="2">{me}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -282,9 +306,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Nature/Outdoors</td>
-                                <td rowspan="2">{dsc.no_like}</td>
-                                <td rowspan="2">{dsc.no_comp}</td>
-                                <td rowspan="2">{no}</td>
+                                <td rowSpan="2">{dsc.no_like}</td>
+                                <td rowSpan="2">{dsc.no_comp}</td>
+                                <td rowSpan="2">{no}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -295,9 +319,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Artistic</td>
-                                <td rowspan="2">{dsc.ar_like}</td>
-                                <td rowspan="2">{dsc.ar_comp}</td>
-                                <td rowspan="2">{ar}</td>
+                                <td rowSpan="2">{dsc.ar_like}</td>
+                                <td rowSpan="2">{dsc.ar_comp}</td>
+                                <td rowSpan="2">{ar}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -308,9 +332,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Helping</td>
-                                <td rowspan="2">{dsc.he_like}</td>
-                                <td rowspan="2">{dsc.he_comp}</td>
-                                <td rowspan="2">{he}</td>
+                                <td rowSpan="2">{dsc.he_like}</td>
+                                <td rowSpan="2">{dsc.he_comp}</td>
+                                <td rowSpan="2">{he}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -327,9 +351,9 @@ const PMin = () => {
                             </tr> 
                             <tr>
                                 <td className='is-warning is-light'>Social Science</td>
-                                <td rowspan="2">{dsc.ss_like}</td>
-                                <td rowspan="2">{dsc.ss_comp}</td>
-                                <td rowspan="2">{ss}</td>
+                                <td rowSpan="2">{dsc.ss_like}</td>
+                                <td rowSpan="2">{dsc.ss_comp}</td>
+                                <td rowSpan="2">{ss}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -340,9 +364,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Influence</td>
-                                <td rowspan="2">{dsc.in_like}</td>
-                                <td rowspan="2">{dsc.in_comp}</td>
-                                <td rowspan="2">{inc}</td>
+                                <td rowSpan="2">{dsc.in_like}</td>
+                                <td rowSpan="2">{dsc.in_comp}</td>
+                                <td rowSpan="2">{inc}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -353,9 +377,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Business Systems</td>
-                                <td rowspan="2">{dsc.bs_like}</td>
-                                <td rowspan="2">{dsc.bs_comp}</td>
-                                <td rowspan="2">{bs}</td>
+                                <td rowSpan="2">{dsc.bs_like}</td>
+                                <td rowSpan="2">{dsc.bs_comp}</td>
+                                <td rowSpan="2">{bs}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -366,9 +390,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Financial Analysis</td>
-                                <td rowspan="2">{dsc.fa_like}</td>
-                                <td rowspan="2">{dsc.fa_comp}</td>
-                                <td rowspan="2">{fa}</td>
+                                <td rowSpan="2">{dsc.fa_like}</td>
+                                <td rowSpan="2">{dsc.fa_comp}</td>
+                                <td rowSpan="2">{fa}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -379,9 +403,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Science</td>
-                                <td rowspan="2">{dsc.sc_like}</td>
-                                <td rowspan="2">{dsc.sc_comp}</td>
-                                <td rowspan="2">{sc}</td>
+                                <td rowSpan="2">{dsc.sc_like}</td>
+                                <td rowSpan="2">{dsc.sc_comp}</td>
+                                <td rowSpan="2">{sc}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -398,9 +422,9 @@ const PMin = () => {
                             </tr> 
                             <tr>
                                 <td className='is-warning is-light'>Quality Control</td>
-                                <td rowspan="2">{dsc.qc_like}</td>
-                                <td rowspan="2">{dsc.qc_comp}</td>
-                                <td rowspan="2">{qc}</td>
+                                <td rowSpan="2">{dsc.qc_like}</td>
+                                <td rowSpan="2">{dsc.qc_comp}</td>
+                                <td rowSpan="2">{qc}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -411,9 +435,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Manual Work</td>
-                                <td rowspan="2">{dsc.mw_like}</td>
-                                <td rowspan="2">{dsc.mw_comp}</td>
-                                <td rowspan="2">{mw}</td>
+                                <td rowSpan="2">{dsc.mw_like}</td>
+                                <td rowSpan="2">{dsc.mw_comp}</td>
+                                <td rowSpan="2">{mw}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -424,9 +448,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Personal Service</td>
-                                <td rowspan="2">{dsc.ps_like}</td>
-                                <td rowspan="2">{dsc.ps_comp}</td>
-                                <td rowspan="2">{ps}</td>
+                                <td rowSpan="2">{dsc.ps_like}</td>
+                                <td rowSpan="2">{dsc.ps_comp}</td>
+                                <td rowSpan="2">{ps}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -437,9 +461,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Construction/ Repair</td>
-                                <td rowspan="2">{dsc.cr_like}</td>
-                                <td rowspan="2">{dsc.cr_comp}</td>
-                                <td rowspan="2">{cr}</td>
+                                <td rowSpan="2">{dsc.cr_like}</td>
+                                <td rowSpan="2">{dsc.cr_comp}</td>
+                                <td rowSpan="2">{cr}</td>
                             </tr>
                             <tr>
                                 <td>
@@ -450,9 +474,9 @@ const PMin = () => {
                             </tr>
                             <tr>
                                 <td className='is-warning is-light'>Basic Service</td>
-                                <td rowspan="2">{dsc.bse_like}</td>
-                                <td rowspan="2">{dsc.bse_comp}</td>
-                                <td rowspan="2">{bse}</td>
+                                <td rowSpan="2">{dsc.bse_like}</td>
+                                <td rowSpan="2">{dsc.bse_comp}</td>
+                                <td rowSpan="2">{bse}</td>
                             </tr>
                             <tr>
                                 <td>

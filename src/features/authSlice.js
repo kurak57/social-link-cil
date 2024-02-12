@@ -5,13 +5,13 @@ const initialState = {
     user: null,
     isError: false,
     isSuccess: false,
-    isLoading:false,
+    isLoading: false,
     message: ""
 }
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI) => {
     try {
-        const response = await axios.post('https://jimat-ui-back.vercel.app/login', {
+        const response = await axios.post('http://localhost:5000/login', {
             email: user.email,
             password: user.password
         });
@@ -26,7 +26,7 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
 
 export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     try {
-        const response = await axios.get('https://jimat-ui-back.vercel.app/me');
+        const response = await axios.get('http://localhost:5000/me');
         return response.data;
     } catch (error) {
         if(error.response){
@@ -36,8 +36,8 @@ export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     }
 });
 
-export const LogOut = createAsyncThunk("user/logout", async() => {
-        await axios.delete('https://jimat-ui-back.vercel.app/logout');
+export const LogOut = createAsyncThunk("user/LogOut", async() => {
+    await axios.delete('http://localhost:5000/logout');
 });
 
 export const authSlice = createSlice({
@@ -46,35 +46,35 @@ export const authSlice = createSlice({
     reducers:{
         reset: (state) => initialState
     },
-    extraReducers:(builder) => {
+    extraReducers:(builder) =>{
         builder.addCase(LoginUser.pending, (state) =>{
             state.isLoading = true;
         });
-        builder.addCase(LoginUser.fulfilled, (state, action) => {
+        builder.addCase(LoginUser.fulfilled, (state, action) =>{
             state.isLoading = false;
             state.isSuccess = true;
             state.user = action.payload;
         });
-        builder.addCase(LoginUser.rejected, (state, action) => {
-            state.isLoading =false;
+        builder.addCase(LoginUser.rejected, (state, action) =>{
+            state.isLoading = false;
             state.isError = true;
-            state.message =action.payload;
-        });
+            state.message = action.payload;
+        })
 
         // Get User Login
         builder.addCase(getMe.pending, (state) =>{
             state.isLoading = true;
         });
-        builder.addCase(getMe.fulfilled, (state, action) => {
+        builder.addCase(getMe.fulfilled, (state, action) =>{
             state.isLoading = false;
             state.isSuccess = true;
             state.user = action.payload;
         });
-        builder.addCase(getMe.rejected, (state, action) => {
-            state.isLoading =false;
+        builder.addCase(getMe.rejected, (state, action) =>{
+            state.isLoading = false;
             state.isError = true;
-            state.message =action.payload;
-        });
+            state.message = action.payload;
+        })
     }
 });
 
