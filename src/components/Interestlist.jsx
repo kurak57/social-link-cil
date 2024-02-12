@@ -12,12 +12,12 @@ const Interestlist = () => {
     },[]);
 
     const getScores = async () => {
-        const response = await axios.get('https://jimat-ui-back.vercel.app/scores');
+        const response = await axios.get('http://localhost:5000/scores');
         setScores(response.data);
     }
 
     const deleteScore = async (scoreId) =>{
-        await axios.delete(`https://jimat-ui-back.vercel.app/scores/${scoreId}`);
+        await axios.delete(`http://localhost:5000/scores/${scoreId}`);
         getScores();
     }
 
