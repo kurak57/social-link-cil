@@ -13,7 +13,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls19' 
                                             value={formData.ls19} onChange={(e)=>
                                             setFormData({...formData, ls19: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs19' 
                                             value={formData.cs19} onChange={(e)=>
                                             setFormData({...formData, cs19: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls20' 
                                             value={formData.ls20} onChange={(e)=>
                                             setFormData({...formData, ls20: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs20' 
                                             value={formData.cs20} onChange={(e)=>
                                             setFormData({...formData, cs20: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls21' 
                                             value={formData.ls21} onChange={(e)=>
                                             setFormData({...formData, ls21: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs21' 
                                             value={formData.cs21} onChange={(e)=>
                                             setFormData({...formData, cs21: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls22' 
                                             value={formData.ls22} onChange={(e)=>
                                             setFormData({...formData, ls22: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs22' 
                                             value={formData.cs22} onChange={(e)=>
                                             setFormData({...formData, cs22: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls23' 
                                             value={formData.ls23} onChange={(e)=>
                                             setFormData({...formData, ls23: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs23' 
                                             value={formData.cs23} onChange={(e)=>
                                             setFormData({...formData, cs23: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='ls24' 
                                             value={formData.ls24} onChange={(e)=>
                                             setFormData({...formData, ls24: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ const data = ['Pilih',1,2,3,4,5,6];
                                     <select name='cs24' 
                                             value={formData.cs24} onChange={(e)=>
                                             setFormData({...formData, cs24: e.target.value })}>
-                                            { data.map(opt=><option value={opt}>{opt}</option>) }
+                                            { data.map((opt, index)=> (<option key={index} value={opt}>{opt}</option>)) }
                                         </select>
                                     </div>
                                 </div>
