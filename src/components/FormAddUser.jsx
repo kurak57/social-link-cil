@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const FormAddUser = () => {
     const dataFakultas = [
-        "Pilih","FIB", "FH", "FT", "FMIPA", "Fasilkom", "FF", "FISIP", "FIK",
-        "FK", "FKG", "FIA", "FEB", "FKM", "FPs", "Vokasi"
+        "Pilih","Ilmu Pengetahuan dan Budaya", "Hukum", "Teknik", "Matematika dan Ilmu Pengetahuan Alam", "Ilmu Komputer", 
+        "Farmasi", "Ilmu Sosial dan Politik", "Ilmu Keperawatan","Kedokteran", "Kedokteran Gigi", 
+        "Ilmu Administrasi", "Ekonomi dan Bisnis", "Kesehatan Masyarakat", "Psikologi", "Vokasi"
     ]
     const [name, setName] = useState('');
     const [fakultas, setFakultas] = useState('');

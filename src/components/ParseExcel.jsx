@@ -36,20 +36,15 @@ const ParseExcel = () => {
         // const excel = excelData[1]
         for (let i = 0; i < excelData.length; i++) {
             let excel = excelData[i]
-            // console.log(
-            //     excel.nama,
-            //     excel.fakultas,
-            //     excel.email,
-            //     excel.npm
-            //     );
+            const npm = toString(excel.npm)
             e.preventDefault()
             try {
                 await axios.post('http://localhost:5000/users', {
                     name: excel.nama,
                     fakultas: excel.fakultas,
                     email: excel.email,
-                    password: toString(excel.npm),
-                    confPassword: toString(excel.npm),
+                    password: npm,
+                    confPassword: npm,
                     role: "user"
                 });
             } catch (error) {
