@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const dataFakultas = [
@@ -8,6 +8,7 @@ const SignUp = () => {
         "Farmasi", "Ilmu Sosial dan Politik", "Ilmu Keperawatan","Kedokteran", "Kedokteran Gigi", 
         "Ilmu Administrasi", "Ekonomi dan Bisnis", "Kesehatan Masyarakat", "Psikologi", "Vokasi"
     ]
+   
     const [name, setName] = useState('');
     const [fakultas, setFakultas] = useState('');
     const [email, setEmail] = useState('');
@@ -15,13 +16,12 @@ const SignUp = () => {
     const [confPassword, setConfPassword] = useState('');
     // const [role, setRole] = useState('user');
     const [msg, setMsg] = useState('');
-
-    const navigate = useNavigate();
+    const [emailSent, setEmailSent] = useState(false)
 
     const saveUser = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:5000/users', {
+             const res = await axios.post('http://localhost:5000/users', {
                 name: name,
                 fakultas: fakultas,
                 email: email,
@@ -29,10 +29,12 @@ const SignUp = () => {
                 confPassword: confPassword,
                 role: "user"
             });
-            navigate("/");
+            console.log(res.data.msg);
+            setEmailSent(true)
         } catch (error) {
             if(error.response) {
                 setMsg(error.response.data.msg);
+                setEmailSent(false)
             }
         }
     }
@@ -80,17 +82,11 @@ const SignUp = () => {
                                 <input type="password" className="input" value={confPassword} onChange={(e)=> setConfPassword(e.target.value)} placeholder='******' />
                             </div>
                         </div>
-                        {/* <div className="field">
-                            <label className='label'>Role</label>
-                            <div className="control">
-                            <div className="select is-fullwidth">
-                                    <select value={role} onChange={(e)=> setRole(e.target.value)}>
-                                        <option selected>Pilih</option>
-                                        <option value="user">Mahasiswa</option>
-                                    </select>
-                                </div>
+                        {emailSent === true && (
+                            <div className='field has-text-info'>
+                            <h1>Pesan verifikasi akun telah dikirimkan ke email terdaftar {email}</h1>
                             </div>
-                        </div> */}
+                        )}
                         <div className="field">
                        <button type='submit' className="button is-success is-fullwidth">Daftar</button>
                         </div>
