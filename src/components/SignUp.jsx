@@ -14,14 +14,15 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
-    // const [role, setRole] = useState('user');
     const [msg, setMsg] = useState('');
     const [emailSent, setEmailSent] = useState(false)
+
+    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const saveUser = async (e) => {
         e.preventDefault()
         try {
-             const res = await axios.post('http://localhost:5000/users', {
+             const res = await axios.post(`${baseUrl}/users`, {
                 name: name,
                 fakultas: fakultas,
                 email: email,
@@ -29,8 +30,8 @@ const SignUp = () => {
                 confPassword: confPassword,
                 role: "user"
             });
-            console.log(res.data.msg);
             setEmailSent(true)
+            setMsg(res.data.msg)
         } catch (error) {
             if(error.response) {
                 setMsg(error.response.data.msg);
@@ -85,6 +86,7 @@ const SignUp = () => {
                         {emailSent === true && (
                             <div className='field has-text-info'>
                             <h1>Pesan verifikasi akun telah dikirimkan ke email terdaftar {email}</h1>
+                            <button className='button is-info is-small'> Halaman Login</button>
                             </div>
                         )}
                         <div className="field">

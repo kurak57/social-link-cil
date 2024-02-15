@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const FormAddUser = () => {
     const dataFakultas = [
         "Pilih","Ilmu Pengetahuan dan Budaya", "Hukum", "Teknik", "Matematika dan Ilmu Pengetahuan Alam", "Ilmu Komputer", 
@@ -21,7 +23,7 @@ const FormAddUser = () => {
     const saveUser = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:5000/users', {
+            await axios.post(`${baseUrl}/users`, {
                 name: name,
                 email: email,
                 fakultas: fakultas,

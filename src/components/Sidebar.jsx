@@ -1,5 +1,5 @@
 import React from "react";
-import {IoPerson, IoReader, IoHome, IoLogOut, IoCheckbox, IoCloudUpload} from 'react-icons/io5'
+import {IoPerson, IoReader, IoHome, IoLogOut, IoCheckbox} from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {LogOut, reset} from '../features/authSlice.js';
@@ -39,9 +39,9 @@ const logout = () =>{
     <li>
     <NavLink to={"/users"}><IoPerson/> users</NavLink>
     </li>
-    <li>
+    {/* <li>
     <NavLink to={"/users/addExcel"}><IoCloudUpload/> Add Users</NavLink>
-    </li>
+    </li> */}
   </ul>
     </div>
   )}

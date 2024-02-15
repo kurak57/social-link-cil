@@ -4,6 +4,8 @@ import axios from "axios";
 import success from "../Checklist.png";
 import React from 'react'
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(false);
 	const param = useParams();
@@ -11,7 +13,7 @@ const EmailVerify = () => {
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
-				const res = await axios.get(`http://localhost:5000/users/${param.id}/verify/${param.token}`);
+				const res = await axios.get(`${baseUrl}/users/${param.id}/verify/${param.token}`);
 				console.log(res.data.msg);
 				setValidUrl(true);
 			} catch (error) {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';  
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const Interestlist = () => {
     const [scores, setScores] = useState([]);
@@ -12,12 +13,12 @@ const Interestlist = () => {
     },[]);
 
     const getScores = async () => {
-        const response = await axios.get('http://localhost:5000/scores');
+        const response = await axios.get(`${baseUrl}/scores`);
         setScores(response.data);
     }
 
     const deleteScore = async (scoreId) =>{
-        await axios.delete(`http://localhost:5000/scores/${scoreId}`);
+        await axios.delete(`${baseUrl}/scores/${scoreId}`);
         getScores();
     }
 

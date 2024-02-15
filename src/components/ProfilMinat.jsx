@@ -6,6 +6,7 @@ import {Radar} from 'react-chartjs-2';
 ChartJS.register(
     LineElement, PointElement, Tooltip, Legend, RadialLinearScale, Filler, RadarController, elements
 )
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const PMin = () => {
     const [dataScore, setDataScore] =  useState({
@@ -124,7 +125,7 @@ const PMin = () => {
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
-                const response = await axios.get(`http://localhost:5000/scores/${id}`);
+                const response = await axios.get(`${baseUrl}/scores/${id}`);
                 const sdt = response.data
                 setDataScore( d => ({
                 ...d, 

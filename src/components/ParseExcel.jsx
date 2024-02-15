@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 const XLSX = require('xlsx')
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const ParseExcel = () => {
-
     const [excelData, setExcelData] = useState([]);
     const [fileName,setFileName] = useState(null)
     const [msg, setMsg] = useState('');
@@ -39,7 +39,7 @@ const ParseExcel = () => {
             const npm = toString(excel.npm)
             e.preventDefault()
             try {
-                await axios.post('http://localhost:5000/users', {
+                await axios.post(`${baseUrl}/users`, {
                     name: excel.nama,
                     fakultas: excel.fakultas,
                     email: excel.email,

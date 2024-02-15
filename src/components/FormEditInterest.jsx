@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useNavigate, useParams} from 'react-router-dom';
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const FormEditInterest = () => {
     const data = ["Pilih",1,2,3,4,5,6,7];
@@ -21,11 +22,10 @@ const FormEditInterest = () => {
         "Pilih","FIB", "FH", "FT", "FMIPA", "Fasilkom", "FF", "FISIP", "FIK",
         "FK", "FKG", "FIA", "FEB", "FKM", "FPs", "Vokasi"
     ]
-
     useEffect(()=>{
         const getInterestById = async () =>{
             try {
-                const response = await axios.get(`http://localhost:5000/interests/${id}`);
+                const response = await axios.get(`${baseUrl}/interests/${id}`);
                 setName(response.data.name);
                 setFakultas(response.data.fakultas);
                 setK2nTematik(response.data.k2nTematik);
@@ -49,7 +49,7 @@ const FormEditInterest = () => {
         e.preventDefault()
 
         try {
-            await axios.patch(`http://localhost:5000/interests/${id}`, {
+            await axios.patch(`${baseUrl}/interests/${id}`, {
                 name: name,
                 fakultas: fakultas,
                 k2nTematik: k2nTematik,

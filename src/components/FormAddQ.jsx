@@ -20,6 +20,8 @@ import Questions16 from "./FormList/Questions16";
 import Questions17 from "./FormList/Questions17";
 import Questions18 from "./FormList/Questions18";
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
 const FormQ = () => {
 // const data = ['Pilih',1,2,3,4,5,6];
   const [page, setPage] = useState(0);
@@ -170,7 +172,7 @@ const FormQ = () => {
 
   const saveQ = async () => {
         try {
-            await axios.post('http://localhost:5000/scores', {
+            await axios.post(`${baseUrl}/scores`, {
                 name: fd.name,
                 fakultas: fd.fakultas,
                 sf_like: sf1, sf_comp: sf2, ma_like: ma1, ma_comp: ma2, bd_like: bd1, bd_comp: bd2,
