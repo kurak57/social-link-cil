@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
+axios.defaults.withCredentials = true;
+
 const initialState = {
     user: null,
     isError: false,
