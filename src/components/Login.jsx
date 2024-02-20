@@ -11,7 +11,7 @@ const Login = () => {
     const {user, isError, isSuccess, isLoading, message} = useSelector(
         (state) => state.auth
     );
-
+   
     useEffect(()=>{
         if(user || isSuccess){
             navigate("/dashboard")
@@ -23,7 +23,7 @@ const Login = () => {
         e.preventDefault();
         dispatch(LoginUser({email, password}));
     }
-
+    
   return (
     <section className="hero has-background-light is-success is-fullheight is-fullwidth">
       <div className="hero-body">

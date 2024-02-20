@@ -4,8 +4,9 @@ import React from "react";
 function Questions1({ formData, setFormData }) {
     const data = ['Pilih',1,2,3,4,5,6];
     const dataFakultas = [
-        "Pilih","FIB", "FH", "FT", "FMIPA", "Fasilkom", "FF", "FISIP", "FIK",
-        "FK", "FKG", "FIA", "FEB", "FKM", "FPs", "Vokasi"
+        "Pilih","Ilmu Pengetahuan dan Budaya", "Hukum", "Teknik", "Matematika dan Ilmu Pengetahuan Alam", "Ilmu Komputer", 
+        "Farmasi", "Ilmu Sosial dan Politik", "Ilmu Keperawatan","Kedokteran", "Kedokteran Gigi", 
+        "Ilmu Administrasi", "Ekonomi dan Bisnis", "Kesehatan Masyarakat", "Psikologi", "Vokasi"
     ]
   return (
     <div className="content">

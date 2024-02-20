@@ -143,7 +143,7 @@ const PM = () => {
                         avg_spi: dataFakultas.data[0].avgStupen, 
                         avg_k2n: dataFakultas.data[0].avgTematik
                     }))
-                // console.log(dataFakultas);
+                console.log(dataFakultas);
             } catch (error) {
                 if(error.response) {
                     setMsg(error.response.data.msg);
@@ -216,14 +216,14 @@ const PM = () => {
           {
             label: dataScore.fakultas,
             data: [
-                10 || avgFakultas.avg_pp, 
-                10 || avgFakultas.avg_mpk, 
-                10 || avgFakultas.avg_am, 
-                10 || avgFakultas.avg_pr, 
-                10 || avgFakultas.avg_pk, 
-                10 || avgFakultas.avg_kw,
-                10 || avgFakultas.avg_spi,
-                10 || avgFakultas.avg_k2n
+                avgFakultas.avg_pp || 10, 
+                avgFakultas.avg_mpk || 10, 
+                avgFakultas.avg_am || 10, 
+                avgFakultas.avg_pr || 10, 
+                avgFakultas.avg_pk || 10, 
+                avgFakultas.avg_kw || 10,
+                avgFakultas.avg_spi || 10,
+                avgFakultas.avg_k2n || 10
             ],
             fill: true,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -236,14 +236,14 @@ const PM = () => {
           {
             label: 'Universitas',
             data: [
-               5 || avgUniv.avgU_pp, 
-               5 || avgUniv.avgU_mpk, 
-               5 || avgUniv.avgU_am, 
-               5 || avgUniv.avgU_pr, 
-               5 || avgUniv.avgU_pk, 
-               5 || avgUniv.avgU_kw,
-               5 || avgUniv.avgU_spi,
-               5 || avgUniv.avgU_k2n
+               avgUniv.avgU_pp || 5, 
+               avgUniv.avgU_mpk || 5, 
+               avgUniv.avgU_am || 5, 
+               avgUniv.avgU_pr || 5, 
+               avgUniv.avgU_pk || 5, 
+               avgUniv.avgU_kw || 5,
+               avgUniv.avgU_spi || 5,
+               avgUniv.avgU_k2n || 5
             ],
             fill: true,
             backgroundColor: 'rgba(203, 223, 0, 0.2)',

@@ -55,8 +55,22 @@ export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
 
 
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
-    await axios.delete(`${baseUrl}/logout`);
-    localStorage.removeItem('refreshToken');
+    try {
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (!refreshToken) {
+            throw new Error("Refresh token tidak tersedia");
+        }
+        await axios.delete(`${baseUrl}/logout`, {
+            headers: {
+                Authorization: `Bearer ${refreshToken}`
+            }
+        });
+        localStorage.removeItem('refreshToken');
+    } catch (error) {
+        console.log(error.response.data.msg);
+    }
+
+    
 });
 
 export const authSlice = createSlice({
