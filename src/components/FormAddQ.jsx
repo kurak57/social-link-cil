@@ -27,6 +27,7 @@ const FormQ = () => {
   const [page, setPage] = useState(0);
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
+  const [token, setToken] = useState('')
   const [formData, setFormData] = useState({
     name: "",
     fakultas: "",
@@ -172,6 +173,13 @@ const FormQ = () => {
 
   const saveQ = async () => {
         try {
+            const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(`${baseUrl}/token`, {
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+                });
+                setToken(response.data.accessToken);
             await axios.post(`${baseUrl}/scores`, {
                 name: fd.name,
                 fakultas: fd.fakultas,
@@ -189,6 +197,10 @@ const FormQ = () => {
                 kemanusiaan: (no*0.5+he*4+ss*3+mw+ps*3+bse*2)/13.5*10,
                 wirausaha: (sf*0.5+ma*4+bd*4+inc*4+bs+fa+ps*0.5+bse*2)/17*10,
                 stupen: (ma*3+dp*1.5+me*2+ar*0.5+ss+bs+fa*0.5+sc*1.5+mw*0.5+cr+bse*0.5)/15*10
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             console.log("Berhasil mengisi data pertanyaan");
             navigate("/interests");

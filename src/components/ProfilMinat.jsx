@@ -9,6 +9,7 @@ ChartJS.register(
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const PMin = () => {
+    const [token, setToken] = useState('')
     const [dataScore, setDataScore] =  useState({
         name: "",
         fakultas: "",
@@ -122,10 +123,31 @@ const PMin = () => {
     // console.log("Rekomendasi:");
     // console.log(rekomL());
 
+    useEffect(() => {
+        const refreshToken = async () => {
+            try {
+                const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(`${baseUrl}/token`, {
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+                });
+                setToken(response.data.accessToken);
+            } catch (error) {
+                console.log(error.response.data.msg);
+            }
+        };
+        refreshToken();
+    }, []);
+
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
-                const response = await axios.get(`${baseUrl}/scores/${id}`);
+                const response = await axios.get(`${baseUrl}/scores/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const sdt = response.data
                 setDataScore( d => ({
                 ...d, 
@@ -144,8 +166,10 @@ const PMin = () => {
                 }
             }
         }
+        if (token) {
         getScoreById(); 
-    }, [id]);
+        }
+    }, [id, token]);
 
     const data ={
         labels: [

@@ -10,13 +10,35 @@ const FormEditUser = () => {
     const [confPassword, setConfPassword] = useState('');
     const [role, setRole] = useState('');
     const [msg, setMsg] = useState('');
+    const [token, setToken] = useState('');
     const navigate = useNavigate();
     const {id} = useParams();
+
+    useEffect(() => {
+        const refreshToken = async () => {
+            try {
+                const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(`${baseUrl}/token`, {
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+                });
+                setToken(response.data.accessToken);
+            } catch (error) {
+                console.log(error.response.data.msg);
+            }
+        };
+        refreshToken();
+    }, []);
 
     useEffect(()=>{
         const getUserById = async () =>{
             try {
-                const response = await axios.get(`${baseUrl}/users/${id}`);
+                const response = await axios.get(`${baseUrl}/users/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setName(response.data.name);
                 setEmail(response.data.email)
                 setRole(response.data.role)
@@ -26,18 +48,32 @@ const FormEditUser = () => {
                 }
             }
         };
+        if (token) {
         getUserById();
-    }, [id]);
+        }
+    }, [id, token]);
 
     const updateUser = async (e) => {
         e.preventDefault()
         try {
+            const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(`${baseUrl}/token`, {
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+            });
+                setToken(response.data.accessToken);
+
             await axios.patch(`${baseUrl}/users/${id}`, {
                 name: name,
                 email: email,
                 password: password,
                 confPassword: confPassword,
                 role: role,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             navigate("/users");
         } catch (error) {

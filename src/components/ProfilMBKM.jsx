@@ -9,6 +9,7 @@ ChartJS.register(
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const PM = () => {
+    const [token, setToken] = useState('')
     const [dataScore, setDataScore] =  useState({
         name: "",
         fakultas: "",
@@ -78,14 +79,30 @@ const PM = () => {
         }
         return results;
     }
-
-    // console.log("Rekomendasi:");
-    // console.log(rekom());
-
+    useEffect(() => {
+        const refreshToken = async () => {
+            try {
+                const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(`${baseUrl}/token`, {
+                    headers: {
+                        Authorization: `Bearer ${refreshToken}`
+                    }
+                });
+                setToken(response.data.accessToken);
+            } catch (error) {
+                console.log(error.response.data.msg);
+            }
+        };
+        refreshToken();
+    }, []);
     useEffect(()=>{
         const getScoreById = async () =>{
             try {
-                const response = await axios.get(`${baseUrl}/scores/${id}`);
+                const response = await axios.get(`${baseUrl}/scores/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const sdt = response.data
                 setDataScore(d => ({
                 ...d,
@@ -110,7 +127,11 @@ const PM = () => {
         }
         const getAvgFakultas = async () =>{
             try {
-                const dataFakultas = await axios.get(`${baseUrl}/scores/${id}/fakultas`);
+                const dataFakultas = await axios.get(`${baseUrl}/scores/${id}/fakultas`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setAvgFakultas( af => ({
                         ...af,
                         avg_pp: dataFakultas.data[0].avgPrtknPelajar,
@@ -131,7 +152,11 @@ const PM = () => {
         };
         const getAvgUniv = async () =>{
             try {
-                const dataUniv= await axios.get(`${baseUrl}/scores/${id}/univ`);
+                const dataUniv= await axios.get(`${baseUrl}/scores/${id}/univ`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setAvgUniv(avgu => ({
                     ...avgu,
                     avgU_pp: dataUniv.data[0].avgAllPrtknPelajar,
@@ -149,10 +174,12 @@ const PM = () => {
                 }
             }
         };
+        if (token) {
         getScoreById(); 
         getAvgFakultas();
         getAvgUniv();
-    }, [id]);
+        }        
+    }, [id, token]);
 
     const data ={
         labels: [
@@ -189,14 +216,14 @@ const PM = () => {
           {
             label: dataScore.fakultas,
             data: [
-                avgFakultas.avg_pp, 
-                avgFakultas.avg_mpk, 
-                avgFakultas.avg_am, 
-                avgFakultas.avg_pr, 
-                avgFakultas.avg_pk, 
-                avgFakultas.avg_kw,
-                avgFakultas.avg_spi,
-                avgFakultas.avg_k2n
+                10 || avgFakultas.avg_pp, 
+                10 || avgFakultas.avg_mpk, 
+                10 || avgFakultas.avg_am, 
+                10 || avgFakultas.avg_pr, 
+                10 || avgFakultas.avg_pk, 
+                10 || avgFakultas.avg_kw,
+                10 || avgFakultas.avg_spi,
+                10 || avgFakultas.avg_k2n
             ],
             fill: true,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -209,14 +236,14 @@ const PM = () => {
           {
             label: 'Universitas',
             data: [
-                avgUniv.avgU_pp, 
-                avgUniv.avgU_mpk, 
-                avgUniv.avgU_am, 
-                avgUniv.avgU_pr, 
-                avgUniv.avgU_pk, 
-                avgUniv.avgU_kw,
-                avgUniv.avgU_spi,
-                avgUniv.avgU_k2n
+               5 || avgUniv.avgU_pp, 
+               5 || avgUniv.avgU_mpk, 
+               5 || avgUniv.avgU_am, 
+               5 || avgUniv.avgU_pr, 
+               5 || avgUniv.avgU_pk, 
+               5 || avgUniv.avgU_kw,
+               5 || avgUniv.avgU_spi,
+               5 || avgUniv.avgU_k2n
             ],
             fill: true,
             backgroundColor: 'rgba(203, 223, 0, 0.2)',

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SignUp = () => {
     const dataFakultas = [
@@ -83,15 +83,15 @@ const SignUp = () => {
                                 <input type="password" className="input" value={confPassword} onChange={(e)=> setConfPassword(e.target.value)} placeholder='******' />
                             </div>
                         </div>
-                        {emailSent === true && (
-                            <div className='field has-text-info'>
-                            <h1>Pesan verifikasi akun telah dikirimkan ke email terdaftar {email}</h1>
-                            <button className='button is-info is-small'> Halaman Login</button>
-                            </div>
-                        )}
                         <div className="field">
                        <button type='submit' className="button is-success is-fullwidth">Daftar</button>
                         </div>
+                        {emailSent === true && (
+                        <div className="field">
+                            <h1>Pesan verifikasi akun telah dikirimkan ke email terdaftar {email}</h1>
+                            <NavLink to={"/signup"}><button className="button is-info is-small">Halaman Login</button></NavLink>
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
