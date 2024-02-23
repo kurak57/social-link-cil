@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import Questions1 from "./FormList/Questions1";
@@ -28,6 +28,11 @@ const FormQ = () => {
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
   const [token, setToken] = useState('')
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Setiap kali 'page' berubah, kembali ke atas halaman.
+  }, [page]);
+
   const [formData, setFormData] = useState({
     name: "",
     fakultas: "",
