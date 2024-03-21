@@ -1,5 +1,4 @@
 import {IoAlbums, IoHelpCircle, IoLogoInstagram, IoLogoWhatsapp, IoLogoYoutube, IoReader} from 'react-icons/io5'
-import {} from '@fortawesome/fontawesome-svg-core'
 
 const Home = () => {
    
